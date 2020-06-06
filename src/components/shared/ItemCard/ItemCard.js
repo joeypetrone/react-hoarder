@@ -1,10 +1,13 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 import './ItemCard.scss';
 
 class ItemCard extends React.Component {
   render() {
     const { item } = this.props;
+    const singleLink = `/stuff/${item.id}`;
 
     return (
       <div className="ItemCard col-3 mb-4">
@@ -13,7 +16,7 @@ class ItemCard extends React.Component {
           <div className="card-body">
             <h5 className="card-title">{item.itemName}</h5>
             <p className="card-text">{item.itemDescription}</p>
-            <button className="btn btn-primary">Go somewhere</button>
+            <Link className="btn btn-info" to={singleLink}>View</Link>
           </div>
         </div>
       </div>
