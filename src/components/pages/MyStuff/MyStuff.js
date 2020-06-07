@@ -1,26 +1,40 @@
 import React from 'react';
 
+import ItemCard from '../../shared/ItemCard/ItemCard';
+
+import authData from '../../../helpers/data/authData';
+import itemData from '../../../helpers/data/itemData';
+
 import './MyStuff.scss';
 
 class MyStuff extends React.Component {
-  viewItemEvent = (e) => {
-    e.preventDefault();
-    const itemId = 'monkeyButt5000';
-    this.props.history.push(`/stuff/${itemId}`);
+  state = {
+    items: [],
   }
 
-  editItemEvent = (e) => {
-    e.preventDefault();
-    const itemId = 'monkeyButt5000';
-    this.props.history.push(`/edit/${itemId}`);
+  getItems = () => {
+    const uid = authData.getUid();
+    itemData.getItemsByUid(uid)
+      .then((items) => this.setState({ items }))
+      .catch((err) => console.error('unable the get items: ', err));
+  }
+
+  componentDidMount() {
+    this.getItems();
   }
 
   render() {
+    const { items } = this.state;
+    const buildItemCards = items.map((item) => (
+      <ItemCard key={item.id} item={item} />
+    ));
+
     return (
       <div className="MyStuff">
         <h1>My Stuff</h1>
-        <button className='btn btn-light m-2' onClick={this.viewItemEvent}>View</button>
-        <button className='btn btn-light m-2' onClick={this.editItemEvent}>Edit</button>
+        <div className="d-flex flex-wrap">
+          {buildItemCards}
+        </div>
       </div>
     );
   }
