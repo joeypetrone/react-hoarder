@@ -65,7 +65,7 @@ class App extends React.Component {
           <React.Fragment>
             <MyNavbar authed={authed} />
             <div className="container">
-              <div className="row">
+              <div className="row justify-content-center">
                 <Switch>
                   <PrivateRoute path='/home' component={Home} authed={authed} />
                   <PrivateRoute path='/stuff/:itemId' component={SingleItem} authed={authed} />

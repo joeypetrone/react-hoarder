@@ -1,10 +1,15 @@
 import React from 'react';
-
 import { Link } from 'react-router-dom';
+
+import itemShape from '../../../helpers/propz/itemShape';
 
 import './ItemCard.scss';
 
 class ItemCard extends React.Component {
+  static propTypes = {
+    item: itemShape.itemShape,
+  }
+
   render() {
     const { item } = this.props;
     const singleLink = `/stuff/${item.id}`;
