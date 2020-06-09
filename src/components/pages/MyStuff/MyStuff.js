@@ -19,6 +19,14 @@ class MyStuff extends React.Component {
       .catch((err) => console.error('unable the get items: ', err));
   }
 
+  removeStuff = (itemId) => {
+    itemData.deleteItem(itemId)
+      .then(() => {
+        this.getItems();
+      })
+      .catch((err) => console.error('unable to delete item: ', err));
+  }
+
   componentDidMount() {
     this.getItems();
   }
@@ -26,7 +34,7 @@ class MyStuff extends React.Component {
   render() {
     const { items } = this.state;
     const buildItemCards = items.map((item) => (
-      <ItemCard key={item.id} item={item} />
+      <ItemCard key={item.id} item={item} removeStuff={this.removeStuff}/>
     ));
 
     return (
