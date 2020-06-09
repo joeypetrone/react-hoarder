@@ -16,7 +16,7 @@ class ItemCard extends React.Component {
 
     return (
       <div className="ItemCard col-3 mb-4">
-        <div className="card">
+        <div className="card p-2">
           <img src={item.itemImage} className="card-img-top" alt={item.itemName} />
           <div className="card-body">
             <h5 className="card-title">{item.itemName}</h5>
