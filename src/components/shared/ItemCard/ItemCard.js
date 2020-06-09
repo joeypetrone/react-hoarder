@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { Link } from 'react-router-dom';
 
 import itemShape from '../../../helpers/propz/itemShape';
@@ -8,6 +10,14 @@ import './ItemCard.scss';
 class ItemCard extends React.Component {
   static propTypes = {
     item: itemShape.itemShape,
+    removeStuff: PropTypes.func.isRequired,
+  }
+
+  removeItem = (e) => {
+    e.preventDefault();
+    const { item, removeStuff } = this.props;
+    const itemId = item.id;
+    removeStuff(itemId);
   }
 
   render() {
@@ -16,12 +26,13 @@ class ItemCard extends React.Component {
 
     return (
       <div className="ItemCard col-3 mb-4">
-        <div className="card p-2">
+        <div className="card px-2 pt-2">
           <img src={item.itemImage} className="card-img-top" alt={item.itemName} />
-          <div className="card-body">
+          <div className="card-body pb-3">
             <h5 className="card-title">{item.itemName}</h5>
             <p className="card-text">{item.itemDescription}</p>
-            <Link className="btn btn-info" to={singleLink}>View</Link>
+            <Link className="btn btn-info m-1" to={singleLink}>View</Link>
+            <button className="btn btn-danger m-1" onClick={this.removeItem}>Delete</button>
           </div>
         </div>
       </div>
