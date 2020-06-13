@@ -34,12 +34,14 @@ class NewItem extends React.Component {
       itemImage,
       itemDescription,
     } = this.state;
+
     const newItem = {
       itemName,
       itemImage,
       itemDescription,
       uid: authData.getUid(),
     };
+
     itemData.postItem(newItem)
       .then(() => this.props.history.push('/home'))
       .catch((err) => console.error('unable to post new item: ', err));
